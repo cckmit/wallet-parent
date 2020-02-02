@@ -1,0 +1,9 @@
+mq:
+  producer:
+    enable: false
+    sendMsgTimeout: 3000
+    maxMessageSize: 4194304
+    compressMsgBodyOverHowMuch: 4096
+    retryTimesWhenSendFailed: 2
+    retryTimesWhenSendAsyncFailed: 2
+    retryAnotherBrokerWhenNotStoreOk: false

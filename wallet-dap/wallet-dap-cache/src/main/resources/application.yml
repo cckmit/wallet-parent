@@ -1,0 +1,11 @@
+spring:
+  redis:
+    cluster:
+      max-redirects: 5
+    lettuce:
+      pool:
+        time-between-eviction-runs: 60s
+        max-active: 8
+        max-idle: 4
+        min-idle: 1
+        max-wait: 5s

@@ -1,0 +1,2 @@
+providerLogFilter=org.wallet.dap.common.log.DubboProviderLogFilter
+consumerLogFilter=org.wallet.dap.common.log.DubboConsumerLogFilter

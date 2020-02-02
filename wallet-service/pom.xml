@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.wallet</groupId>
+        <artifactId>wallet-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>wallet-service</artifactId>
+    <name>service</name>
+    <description>微服务-所有内部微服务</description>
+    <packaging>pom</packaging>
+    <modules>
+        <module>wallet-service-admin</module>
+        <module>wallet-service-application</module>
+        <module>wallet-service-batch</module>
+        <module>wallet-service-common</module>
+    </modules>
+
+    <properties>
+        <dyn.deply.version>${project.artifactId}</dyn.deply.version>
+    </properties>
+</project>

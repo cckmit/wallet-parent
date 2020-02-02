@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_HOME" value="/var/log/java/wallet-gateway-client"/>
+    <property name="ERROR_LOG_HOME" value="${LOG_HOME}/error"/>
+    <property name="CHARSET" value="UTF-8"/>
+    <property name="MAX_HISTORY" value="180"/>
+    <property name="MAX_FILE_SIZE" value="100MB"/>
+    <property name="TOTAL_SIZE_CAP" value="10GB"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>|%-5p|%d{yyyy-MM-dd HH:mm:ss.SSS}|%t|%logger{10}|%M|%m%n</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR_FILE_STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${ERROR_LOG_HOME}/out_error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>|%-5p|%d{yyyy-MM-dd HH:mm:ss.SSS}|%t|%-40logger{10}|%M|%m%n</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${ERROR_LOG_HOME}/out_error_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="FILE_STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/out.log</file>
+        <encoder>
+            <pattern>|%-5p|%d{yyyy-MM-dd HH:mm:ss.SSS}|%t|%-40logger{10}|%M|%m%n</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/out_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.wallet" level="DEBUG" />
+    <logger name="com.alibaba.dubbo" level="WARN" />
+    <logger name="org.apache.zookeeper" level="WARN" />
+    <logger name="org.springframework" level="WARN" />
+
+    <appender name="ASYNC_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="STDOUT"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <appender name="ASYNC_FILE_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="FILE_STDOUT"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <appender name="ASYNC_ERROR_FILE_STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="ERROR_FILE_STDOUT"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_STDOUT"/>
+        <appender-ref ref="ASYNC_FILE_STDOUT"/>
+        <appender-ref ref="ASYNC_ERROR_FILE_STDOUT"/>
+    </root>
+</configuration>

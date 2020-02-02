@@ -1,0 +1,83 @@
+server:
+  port: 9900
+  servlet:
+    context-path: /admin
+
+spring:
+  application:
+    name: @project.name@
+  data:
+    redis:
+      repositories:
+        enabled: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  profiles:
+    active: @spring.profile@
+  servlet:
+    multipart:
+      max-file-size: 1MB
+
+dubbo:
+  application:
+    name: @project.name@
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  registry:
+    address: ${dubbo.address}
+    file: dubbo-registry/@project.name@.properties
+  log-config-list:
+    - methodName: upload
+      noParam: true
+
+mq:
+  instanceName: @project.name@
+  producer:
+    enable: true
+    group: producer-@project.name@
+
+api:
+  token:
+    enable: false
+
+admin:
+  token-timeout: 2H
+
+---
+spring:
+  profiles: local
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+mq:
+  nameServer: 127.0.0.1:9876
+
+---
+spring:
+  profiles: test
+  redis:
+    cluster:
+      nodes: 172.31.32.165:7001,172.31.32.165:7002,172.31.32.165:7003,172.31.32.165:7004,172.31.32.165:7005,172.31.32.165:7006
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+mq:
+  nameServer: 127.0.0.1:9876
+
+---
+spring:
+  profiles: prod
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+mq:
+  nameServer: 127.0.0.1:9876

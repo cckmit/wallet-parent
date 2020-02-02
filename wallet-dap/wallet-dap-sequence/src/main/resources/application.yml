@@ -1,0 +1,13 @@
+server:
+  port: 10880
+
+dubbo:
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: dubbo-registry/@project.name@.properties
+  address: zookeeper://127.0.0.1:2181
+  port: 20880
+
+spring:
+  application:
+    name: @project.name@

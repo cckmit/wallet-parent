@@ -1,0 +1,82 @@
+server:
+  port: 10900
+
+spring:
+  application:
+    name: @project.name@
+  data:
+    redis:
+      repositories:
+        enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+  profiles:
+    active: @spring.profile@
+
+dubbo:
+  application:
+    name: @project.name@
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  registry:
+    address: ${dubbo.address}
+    file: dubbo-registry/@project.name@.properties
+  port: 20900
+
+mq:
+  instanceName: @project.name@
+  producer:
+    enable: true
+    group: producer-@project.name@
+
+---
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/saas_wallet?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  profiles: local
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+mq:
+  nameServer: 127.0.0.1:9876
+
+---
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/saas_wallet?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true&serverTimezone=GMT%2B8
+    username: saas
+    password: saas#$%234
+  profiles: test
+  redis:
+    cluster:
+      nodes: 172.31.32.165:7001,172.31.32.165:7002,172.31.32.165:7003,172.31.32.165:7004,172.31.32.165:7005,172.31.32.165:7006
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+mq:
+  nameServer: 127.0.0.1:9876
+
+---
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/saas_wallet?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useOldAliasMetadataBehavior=true&serverTimezone=GMT%2B8
+    username: saas
+    password: saas#$%234
+  profiles: prod
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+mq:
+  nameServer: 127.0.0.1:9876

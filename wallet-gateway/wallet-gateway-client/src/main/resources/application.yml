@@ -1,0 +1,133 @@
+server:
+  port: 10890
+
+dubbo:
+  application:
+    name: @project.name@
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  registry:
+    address: ${dubbo.address}
+    file: dubbo-registry/@project.name@.properties
+  port: 20890
+  log-config-list:
+    - methodName: upload
+      noParam: true
+
+spring:
+  application:
+    name: @project.name@
+  profiles:
+    active: @spring.profile@
+  mail:
+    properties:
+      mail.smtp.port: 465
+      mail.smtp.socketFactory.port: 445
+      mail.smtp.ssl.enable: true
+      mail.socketFactory.fallback: false
+      smtp.auth: true
+      smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+    host: smtp.gmail.com
+    default-encoding: UTF-8
+
+oss:
+  name: oss-cn-hongkong.aliyuncs.com
+  accessKeyId: *
+  accessKeySecret: *
+  bucketName: wallet
+  systemEnvironment: /
+  fileSuffixImg: .bmp,.jpg,.png,.tiff,.gif,.pcx,.tga,.exif,.fpx,.svg,.psd,.cdr,.pcd,.dxf,.ufo,.eps,.ai,.raw,.wmf,.jpeg
+  fileSuffixVideo: .avi,.wma,.rmvb,.rm,.flash,.mp4,.mid,.3gp
+  headPath: https://wallet.oss-cn-hongkong.aliyuncs.com/
+  sts:
+    roleArn: *
+    endpoint: sts.aliyuncs.com
+
+sms:
+  text:
+    url: http://intapi.253.com/send/json
+    account: *
+    password: *
+  voice:
+    url: http://intapi.253.com/sendVoice/OTP
+    account: *
+    password: *
+  connectionTimeout: 10000
+  readTimeout: 2000
+  authExpire: 180
+  debugEnable: true
+  debugCode: 111111
+  message: 您好！您的验证码是：{}\n该验证码将在3分钟后失效！
+
+jiguang:
+  # Wallet Saas Test
+  app-key: *
+  master-secret: *
+
+aws:
+  s3:
+    region: ap-northeast-1
+    bucket: walletsaasfile
+    access-key-id: *
+    access-key-secret: *
+
+block:
+  coin-host:
+    EOS: "http://172.31.40.83:9005"
+
+---
+spring:
+  profiles: local
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+dfuse:
+  clear-cursor: true
+  start-block: 67532626
+
+binance:
+  api:
+    proxy:
+      ip: 127.0.0.1
+      port: 1080
+
+quotes:
+  hosts: {Newdex: https://api.newdex.vip}
+
+DCP:
+  proxyHost: 127.0.0.1
+  proxyPort: 1080
+
+---
+spring:
+  mail:
+    username: *
+    password: *
+  profiles: test
+  redis:
+    cluster:
+      nodes: 172.31.32.165:7001,172.31.32.165:7002,172.31.32.165:7003,172.31.32.165:7004,172.31.32.165:7005,172.31.32.165:7006
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
+
+dfuse:
+  # DFuse sit-wallet-app
+  api-key: *
+
+---
+spring:
+  mail:
+    username: *
+    password: *
+  profiles: prod
+  redis:
+    cluster:
+      nodes: 127.0.0.1:6380,127.0.0.1:6381,127.0.0.1:6382
+
+dubbo:
+  address: zookeeper://127.0.0.1:2181
