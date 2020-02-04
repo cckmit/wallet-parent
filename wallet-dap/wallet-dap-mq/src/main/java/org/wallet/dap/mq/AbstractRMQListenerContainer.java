@@ -187,7 +187,7 @@ public abstract class AbstractRMQListenerContainer implements RMQListenerContain
         consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
         consumer.setMaxReconsumeTimes(maxReconsumeTimes);
         consumer.setMessageModel(messageModel);
-        if(!StringUtils.isEmpty(getInstanceName())) consumer.setClientIP(buildClientIP(getInstanceName()));
+        if(!StringUtils.isEmpty(getInstanceName())) { consumer.setClientIP(buildClientIP(getInstanceName())); }
         switch (selectorType) {
             case TAG:
                 consumer.subscribe(topic, selectorExpress);

@@ -35,8 +35,8 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
     }
 	
 	public SendResult syncSend(String topic, String tags, String keys, Object message, long timeout) {
-		if (Objects.isNull(tags)) throw new IllegalArgumentException("`tags` cannot be null");
-	    if (Objects.isNull(keys)) throw new IllegalArgumentException("`keys` cannot be null");
+		if (Objects.isNull(tags)) { throw new IllegalArgumentException("`tags` cannot be null"); }
+	    if (Objects.isNull(keys)) { throw new IllegalArgumentException("`keys` cannot be null"); }
         return super.syncSend(new MessageWrapper(topic, tags, keys, message), timeout);
     }
 	
@@ -61,8 +61,8 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
 	}
 	
 	public SendResult syncSendOrderly(String topic, String tags, String keys, Object message, Object hashKey, long timeout) {
-		if (Objects.isNull(tags)) throw new IllegalArgumentException("`tags` cannot be null");
-	    if (Objects.isNull(keys)) throw new IllegalArgumentException("`keys` cannot be null");
+		if (Objects.isNull(tags)) { throw new IllegalArgumentException("`tags` cannot be null"); }
+	    if (Objects.isNull(keys)) { throw new IllegalArgumentException("`keys` cannot be null"); }
 	    return super.syncSendOrderly(new MessageWrapper(topic, tags, keys, message), hashKey, timeout);
 	}
 		
@@ -87,13 +87,13 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
 	}
 	
 	public void asyncSend(String topic, String tags, String keys, Object message, SendCallback sendCallback, long timeout) {
-		if (Objects.isNull(tags)) throw new IllegalArgumentException("`tags` cannot be null");
-	    if (Objects.isNull(keys)) throw new IllegalArgumentException("`keys` cannot be null");
+		if (Objects.isNull(tags)) { throw new IllegalArgumentException("`tags` cannot be null"); }
+	    if (Objects.isNull(keys)) { throw new IllegalArgumentException("`keys` cannot be null"); }
         asyncSend(new MessageWrapper(topic, tags, keys, message), sendCallback, timeout);
     }
 	
 	public void asyncSend(MessageWrapper message, SendCallback sendCallback, long timeout) {
-		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
+		if(Objects.isNull(message.getTopic())) { throw new IllegalArgumentException("`topic` cannot be null"); }
 		if (Objects.isNull(message) || Objects.isNull(message.getBodyObject())) {
 	         throw new IllegalArgumentException("`message` and `message.body` cannot be null");
 	    }
@@ -125,18 +125,17 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
 	}
 	
 	public void asyncSendOrderly(String topic, String tags, String keys, Object message, Object hashKey, SendCallback sendCallback, long timeout) {
-		if (Objects.isNull(tags)) throw new IllegalArgumentException("`tags` cannot be null");
-	    if (Objects.isNull(keys)) throw new IllegalArgumentException("`keys` cannot be null");
+		if (Objects.isNull(tags)) { throw new IllegalArgumentException("`tags` cannot be null"); }
+	    if (Objects.isNull(keys)) { throw new IllegalArgumentException("`keys` cannot be null"); }
 		asyncSendOrderly(new MessageWrapper(topic,tags,keys, message), hashKey, sendCallback, timeout);
 	}
 	
 	public void asyncSendOrderly(MessageWrapper message, Object hashKey, SendCallback sendCallback, long timeout) {
-		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
-		if(Objects.isNull(hashKey)) throw new IllegalArgumentException("`hashKey` cannot be null");
-		if(Objects.isNull(message) || Objects.isNull(message.getBodyObject())) {
-	         throw new IllegalArgumentException("`message` and `message.body` cannot be null");
-	    }
-        try {
+		if(Objects.isNull(message)) { throw new IllegalArgumentException("`message` cannot be null"); }
+		if(Objects.isNull(message.getTopic())) { throw new IllegalArgumentException("`topic` cannot be null"); }
+		if(Objects.isNull(message.getBodyObject())) { throw new IllegalArgumentException("`message` and `message.body` cannot be null"); }
+		if(Objects.isNull(hashKey)) { throw new IllegalArgumentException("`hashKey` cannot be null"); }
+		try {
             getProducer().send(message, getMessageQueueSelector(), hashKey, sendCallback, timeout);
         } catch (Exception e) {
             throw new MQException(e);
@@ -152,16 +151,15 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
 	}
 	
 	public void sendOneWay(String topic, String tags, String keys, Object mmessage) {
-		if (Objects.isNull(tags)) throw new IllegalArgumentException("`tags` cannot be null");
-	    if (Objects.isNull(keys)) throw new IllegalArgumentException("`keys` cannot be null");
+		if (Objects.isNull(tags)) { throw new IllegalArgumentException("`tags` cannot be null"); }
+	    if (Objects.isNull(keys)) { throw new IllegalArgumentException("`keys` cannot be null"); }
 		sendOneWay(new MessageWrapper(topic, tags, keys, mmessage));
 	}
 	
 	public void sendOneWay(MessageWrapper message) {
-		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
-		if(Objects.isNull(message) || Objects.isNull(message.getBodyObject())) {
-	         throw new IllegalArgumentException("`message` and `message.body` cannot be null");
-	    }
+		if(Objects.isNull(message)) { throw new IllegalArgumentException("`message` cannot be null"); }
+		if(Objects.isNull(message.getTopic())) { throw new IllegalArgumentException("`topic` cannot be null"); }
+		if(Objects.isNull(message.getBodyObject())) { throw new IllegalArgumentException("`message` and `message.body` cannot be null"); }
         try {
             getProducer().sendOneway(message);
         } catch (Exception e) {
@@ -178,17 +176,16 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
 	}
 	
 	public void sendOneWayOrderly(String topic, String tags, String keys, Object message,Object hashKey) {
-		if (Objects.isNull(tags)) throw new IllegalArgumentException("`tags` cannot be null");
-	    if (Objects.isNull(keys)) throw new IllegalArgumentException("`keys` cannot be null");
+		if (Objects.isNull(tags)) { throw new IllegalArgumentException("`tags` cannot be null"); }
+	    if (Objects.isNull(keys)) { throw new IllegalArgumentException("`keys` cannot be null"); }
 		sendOneWayOrderly(new MessageWrapper(topic, tags, keys, message), hashKey);
 	}
 	
 	public void sendOneWayOrderly(MessageWrapper message, Object hashKey)  {
+		if(Objects.isNull(message)) { throw new IllegalArgumentException("`message` cannot be null"); }
 		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
-		if(Objects.isNull(hashKey)) throw new IllegalArgumentException("`hashKey` cannot be null");
-		if(Objects.isNull(message) || Objects.isNull(message.getBodyObject())) {
-	         throw new IllegalArgumentException("`message` and `message.body` cannot be null");
-	    }
+		if(Objects.isNull(message.getBodyObject())) { throw new IllegalArgumentException("`message` and `message.body` cannot be null"); }
+		if(Objects.isNull(hashKey)) { throw new IllegalArgumentException("`hashKey` cannot be null"); }
         try {
             getProducer().sendOneway(message, getMessageQueueSelector(), hashKey);
         } catch (Exception e) {

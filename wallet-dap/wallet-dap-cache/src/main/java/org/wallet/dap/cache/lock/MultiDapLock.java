@@ -21,7 +21,7 @@ public class MultiDapLock implements Lock {
 	private static final ExecutorService THREAD_POOL = Executors.newCachedThreadPool();
 
 	public MultiDapLock(DapLock...locks) {
-		if(locks.length == 0) throw new IllegalArgumentException("Constructor parameter can not be null");
+		if(locks.length == 0) { throw new IllegalArgumentException("Constructor parameter can not be null"); }
 		this.locks = locks;
 	}
 
@@ -45,7 +45,7 @@ public class MultiDapLock implements Lock {
 	@Override
 	public boolean tryLock() {
 		for(DapLock lock : locks) {
-			if(!lock.tryLock()) return false;
+			if(!lock.tryLock()) { return false; }
 		}
 		return true;
 	}
@@ -53,7 +53,7 @@ public class MultiDapLock implements Lock {
 	@Override
 	public boolean tryLock(long time, TimeUnit unit) {
 		for(DapLock lock : locks) {
-			if(!lock.tryLock(time, unit)) return false;
+			if(!lock.tryLock(time, unit)) { return false; }
 		}
 		return true;
 	}

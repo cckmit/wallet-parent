@@ -104,9 +104,9 @@ public class QueryParams<T> implements Specification<T> {
      * @return 该实例
      */
     public QueryParams clearAll() {
-        if (!this.andFilters.isEmpty()) this.andFilters.clear();
-        if (!this.orFilters.isEmpty()) this.orFilters.clear();
-        if (!this.orders.isEmpty()) this.orders.clear();
+        if (!this.andFilters.isEmpty()) { this.andFilters.clear(); }
+        if (!this.orFilters.isEmpty()) { this.orFilters.clear(); }
+        if (!this.orders.isEmpty()) { this.orders.clear(); }
         return this;
     }
 
@@ -116,7 +116,7 @@ public class QueryParams<T> implements Specification<T> {
      * @return 该实例
      */
     public QueryParams clearAnd() {
-        if (!this.andFilters.isEmpty()) this.andFilters.clear();
+        if (!this.andFilters.isEmpty()) { this.andFilters.clear(); }
         return this;
     }
 
@@ -126,7 +126,7 @@ public class QueryParams<T> implements Specification<T> {
      * @return 该实例
      */
     public QueryParams clearOr() {
-        if (!this.orFilters.isEmpty()) this.andFilters.clear();
+        if (!this.orFilters.isEmpty()) { this.andFilters.clear(); }
         return this;
     }
 
@@ -136,7 +136,7 @@ public class QueryParams<T> implements Specification<T> {
      * @return 该实例
      */
     public QueryParams clearOrder() {
-        if (!this.orders.isEmpty()) this.orders.clear();
+        if (!this.orders.isEmpty()) { this.orders.clear(); }
         return this;
     }
 

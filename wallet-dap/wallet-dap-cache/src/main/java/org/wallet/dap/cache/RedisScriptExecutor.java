@@ -32,15 +32,15 @@ public class RedisScriptExecutor implements InitializingBean {
     }
 
     public static <T> T execute(String scriptFileName, List<String> keys, List<Object> args, Class<T> clazz) {
-        if(clazz == null) throw new IllegalArgumentException("aguament clazz can not be null");
+        if(clazz == null) { throw new IllegalArgumentException("aguament clazz can not be null"); }
         return executeScript(scriptFileName, keys, args, clazz);
     }
 
     public static <T> T executeScript(String scriptFileName, List<String> keys, List<Object> args, Class<T> clazz) {
-        if(StringUtils.isEmpty(scriptFileName)) throw new IllegalArgumentException("scriptFileName can not be null");
-        if(keys == null || keys.isEmpty()) throw new IllegalArgumentException("keys can not be null");
+        if(StringUtils.isEmpty(scriptFileName)) { throw new IllegalArgumentException("scriptFileName can not be null"); }
+        if(keys == null || keys.isEmpty()) { throw new IllegalArgumentException("keys can not be null"); }
         String script = scriptMap.get(scriptFileName);
-        if (script == null) throw new IllegalArgumentException(String.format("File [%s] is not exist", scriptFileName));
+        if (script == null) { throw new IllegalArgumentException(String.format("File [%s] is not exist", scriptFileName)); }
         DefaultRedisScript<T> redisScript = new DefaultRedisScript<>();
         redisScript.setScriptText(script);
         redisScript.setResultType(clazz);

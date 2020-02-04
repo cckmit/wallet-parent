@@ -26,7 +26,9 @@ public class DapLock implements Lock{
 	@Override
 	public void lock() {
 		while(!locked) {
-			if(locked = (RedisScriptExecutor.execute("lock.lua", keys, args, Long.class) == 1)) break;
+			if(locked = (RedisScriptExecutor.execute("lock.lua", keys, args, Long.class) == 1)) {
+				break;
+			}
 		}
 	}
 
@@ -37,7 +39,7 @@ public class DapLock implements Lock{
 
 	@Override
 	public boolean tryLock() {
-		if(locked) return locked;
+		if(locked) { return true; }
 		return locked = (RedisScriptExecutor.execute("lock.lua", keys, args, Long.class) == 1);
 	}
 

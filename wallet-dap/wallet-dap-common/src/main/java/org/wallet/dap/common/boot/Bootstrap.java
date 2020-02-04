@@ -37,17 +37,23 @@ private ClassPathXmlApplicationContext context;
 			Bootstrap.getInstance().start();
 		} else {
 			switch (args.length) {
-				case 1: if(args[0].equals("start")) 
-							Bootstrap.getInstance().start(); 
-						else 
-							Bootstrap.getInstance().sendClosingSignal();
+				case 1: {
+					if (args[0].equals("start")) {
+						Bootstrap.getInstance().start();
+					} else {
+						Bootstrap.getInstance().sendClosingSignal();
+					}
 					break;
-				case 2: Bootstrap.getInstance().setServiceName(args[0]); 
-						if(args[1].equals("start")) 
-							Bootstrap.getInstance().start();
-						else
-							Bootstrap.getInstance().sendClosingSignal();
+				}
+				case 2: {
+					Bootstrap.getInstance().setServiceName(args[0]);
+					if (args[1].equals("start")) {
+						Bootstrap.getInstance().start();
+					} else {
+						Bootstrap.getInstance().sendClosingSignal();
+					}
 					break;
+				}
 				default: break;
 			}
 		}

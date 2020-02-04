@@ -26,7 +26,7 @@ public abstract class AbstractRMQSendingTemplate {
 	}
 	
 	public SendResult syncSend(MessageWrapper message, long timeout) {
-		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
+		if(Objects.isNull(message.getTopic())) { throw new IllegalArgumentException("`topic` cannot be null"); }
 		if (Objects.isNull(message) || Objects.isNull(message.getBody()) || message.getBody().length==0) {
 	         throw new IllegalArgumentException("`message` and `message.body` cannot be null");
 	    }
@@ -46,8 +46,8 @@ public abstract class AbstractRMQSendingTemplate {
 	}
 	
 	public SendResult syncSendOrderly(MessageWrapper message, Object hashKey, long timeout) {
-		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
-		if(Objects.isNull(hashKey)) throw new IllegalArgumentException("`hashKey` cannot be null");
+		if(Objects.isNull(message.getTopic())) { throw new IllegalArgumentException("`topic` cannot be null"); }
+		if(Objects.isNull(hashKey)) { throw new IllegalArgumentException("`hashKey` cannot be null"); }
 		if (Objects.isNull(message) || Objects.isNull(message.getBodyObject())) {
 	         throw new IllegalArgumentException("`message` and `message.body` cannot be null");
 	    }

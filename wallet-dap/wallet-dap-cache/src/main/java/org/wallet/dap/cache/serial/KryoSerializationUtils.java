@@ -35,7 +35,7 @@ public class KryoSerializationUtils {
     }
     
     public static byte[] serialize(Object object) {
-    	if(object == null) return null;
+    	if(object == null) { return null; }
     	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 		Output output = new Output(byteArrayOutputStream);
 		getInstance().writeClassAndObject(output, object);
@@ -45,7 +45,7 @@ public class KryoSerializationUtils {
 
     @SuppressWarnings("unchecked")
 	public static <T> T deserialize(byte[] byteArray) {
-		if(byteArray == null) return null;
+		if(byteArray == null) { return null; }
 		Input input = new Input(new ByteArrayInputStream(byteArray));
 		return (T) getInstance().readClassAndObject(input);
     }
