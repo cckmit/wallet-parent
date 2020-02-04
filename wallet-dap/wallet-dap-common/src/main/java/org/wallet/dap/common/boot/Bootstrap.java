@@ -38,7 +38,7 @@ private ClassPathXmlApplicationContext context;
 		} else {
 			switch (args.length) {
 				case 1: {
-					if (args[0].equals("start")) {
+					if ("start".equals(args[0])) {
 						Bootstrap.getInstance().start();
 					} else {
 						Bootstrap.getInstance().sendClosingSignal();
@@ -47,7 +47,7 @@ private ClassPathXmlApplicationContext context;
 				}
 				case 2: {
 					Bootstrap.getInstance().setServiceName(args[0]);
-					if (args[1].equals("start")) {
+					if ("start".equals(args[1])) {
 						Bootstrap.getInstance().start();
 					} else {
 						Bootstrap.getInstance().sendClosingSignal();

@@ -34,7 +34,7 @@ public class SpringBootstrap extends AbstractBootstrap {
         } else {
             switch (args.length) {
                 case 1:
-                    if (args[0].equals("start")) {
+                    if ("start".equals(args[0])) {
                         SpringBootstrap.getInstance().start();
                     } else {
                         SpringBootstrap.getInstance().sendClosingSignal();
@@ -42,7 +42,7 @@ public class SpringBootstrap extends AbstractBootstrap {
                     break;
                 case 2:
                     SpringBootstrap.getInstance().setServiceName(args[0]);
-                    if (args[1].equals("start")) {
+                    if ("start".equals(args[1])) {
                         SpringBootstrap.getInstance().start();
                     } else {
                         SpringBootstrap.getInstance().sendClosingSignal();

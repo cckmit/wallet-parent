@@ -183,7 +183,7 @@ public class RMQSendingTemplate extends AbstractRMQSendingTemplate {
 	
 	public void sendOneWayOrderly(MessageWrapper message, Object hashKey)  {
 		if(Objects.isNull(message)) { throw new IllegalArgumentException("`message` cannot be null"); }
-		if(Objects.isNull(message.getTopic())) throw new IllegalArgumentException("`topic` cannot be null");
+		if(Objects.isNull(message.getTopic())) { throw new IllegalArgumentException("`topic` cannot be null"); }
 		if(Objects.isNull(message.getBodyObject())) { throw new IllegalArgumentException("`message` and `message.body` cannot be null"); }
 		if(Objects.isNull(hashKey)) { throw new IllegalArgumentException("`hashKey` cannot be null"); }
         try {

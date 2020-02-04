@@ -1,5 +1,6 @@
 package org.wallet.dap.cache.lock;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wallet.dap.cache.RedisScriptExecutor;
@@ -18,7 +19,7 @@ import java.util.concurrent.locks.Lock;
 public class MultiDapLock implements Lock {
 	private static final Logger logger = LoggerFactory.getLogger(MultiDapLock.class);
 	private final DapLock[] locks;
-	private static final ExecutorService THREAD_POOL = Executors.newCachedThreadPool();
+	private static final ExecutorService THREAD_POOL = Executors.newCachedThreadPool(new ThreadFactoryBuilder().setNameFormat("MultiDapLock-%d").build());
 
 	public MultiDapLock(DapLock...locks) {
 		if(locks.length == 0) { throw new IllegalArgumentException("Constructor parameter can not be null"); }
