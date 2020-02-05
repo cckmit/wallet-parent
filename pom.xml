@@ -41,7 +41,7 @@
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <jpush.version>3.3.11</jpush.version>
         <aws.version>2.7.10</aws.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.5.0</shiro.version>
     </properties>
 
     <dependencyManagement>
